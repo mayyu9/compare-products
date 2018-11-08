@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ReactDom from 'react-dom';
+import React from 'react';
+// import ReactDom from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Cherry from './images/Cherry.png';
 // import Nuts from './images/Nuts.png';
@@ -11,7 +11,7 @@ const productsLists = ({ products, compare }) =>{
 
 	let arr = [];
 	let productsItems = [];
-	let imgPath;
+	// let imgPath;
 
 	for (let key in data) {
 		if (data.hasOwnProperty(key) && (typeof data[key] === "object")) {

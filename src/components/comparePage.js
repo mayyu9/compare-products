@@ -15,7 +15,7 @@ class Compare extends Component{
 	componentDidMount() {
 		axios.get('https://api.myjson.com/bins/uyl3y')
 			.then((response) => {
-				console.log(response);
+				// console.log(response);
 				this.setState({data: response})
 		})
 		.catch(function (error) {

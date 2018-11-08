@@ -8,6 +8,7 @@ class compareDetails extends Component{
   	}
 
 	render(){
+		console.log('compare details render: '+JSON.stringify(this.props));
 		let currentProd = this.props.thisProduct;
 		return(
 			<div>
@@ -23,7 +24,7 @@ class compareDetails extends Component{
 			</div>
 		)
 	}
-	
+
 }
 
 export default compareDetails;

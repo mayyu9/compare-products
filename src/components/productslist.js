@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDom from 'react-dom';
+// import ReactDom from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CompareDetails from './compareDetails';
 // import Cherry from './images/Cherry.png';
@@ -7,7 +7,7 @@ import CompareDetails from './compareDetails';
 // import Orange from './images/Orancge.png';
 // import Strawberry from './images/Strawberry.png';
 
-class productsLists extends Component{
+class ProductsLists extends Component{
 	constructor(props) {
 		super (props);
 
@@ -19,7 +19,7 @@ class productsLists extends Component{
 		this.handleClickChangeName = this.handleClickChangeName.bind(this);
 		this.dataToChaild = this.dataToChaild.bind(this);
 	}
-	
+
 	handleClickChangeName (product, id) {
 		this.setState({
 			buttonName: !this.state.buttonName
@@ -30,13 +30,17 @@ class productsLists extends Component{
 		this.setState({
 			productDetail: product
 		});
+		// let newValue = this.state.productDetail.concat(product);
+		// this.setState({
+		// 	productDetail: newValue
+		// });
 	}
 	render(){
 		const dataList = this.props.products;
 
 	let arr = [];
 	let productsItems = [];
-	let imgPath;
+	// let imgPath;
 
 
 	for (let key in dataList) {
@@ -50,18 +54,18 @@ class productsLists extends Component{
 	for(let prop in productLength){
 		productsItems.push(productLength[prop]);
 	}
-	let productDetailCopy = this.state.productDetail;
+	// let productDetailCopy = this.state.productDetail;
 	return(
 		<div>
 			{productsItems.map((product, index) =>
-			<div className="col-sm-6 col-md-3 inlineBlock">
+			<div className="col-sm-6 col-md-3 inlineBlock" key={product.id}>
 			 <div className="product" key={product.id}>
 			 		<div className="image_overlay"> </div>
-			 		<div className="view_details" onClick={(event) => 
+			 		<div className="view_details" onClick={(event) =>
 			 			{this.handleClickChangeName(); this.dataToChaild(product)} }>
-			 				{ this.state.buttonName ? "Remove" : "Copare" }
+			 				{ this.state.buttonName ? "Remove" : "Compare" }
 			 			</div>
-			 		
+
 					<img src={product.image} title={product.name} />
 					<div className="starts">
 						<div className="stats-container">
@@ -71,7 +75,7 @@ class productsLists extends Component{
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
 			)}
 			{this.state.productDetail !== null &&
@@ -83,4 +87,4 @@ class productsLists extends Component{
 
 	}
 
-export default productsLists;
+export default ProductsLists;
