@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-// import ReactDom from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CompareDetails from './compareDetails';
-// import Cherry from './images/Cherry.png';
-// import Nuts from './images/Nuts.png';
-// import Orange from './images/Orancge.png';
-// import Strawberry from './images/Strawberry.png';
 
 class ProductsLists extends Component{
 	constructor(props) {
@@ -13,8 +8,7 @@ class ProductsLists extends Component{
 
 		this.state = {
 			buttonName: false,
-			productDetail: null,
-			productId: false
+			productDetail: []
 		}
 		this.handleClickChangeName = this.handleClickChangeName.bind(this);
 		this.dataToChaild = this.dataToChaild.bind(this);
@@ -24,49 +18,27 @@ class ProductsLists extends Component{
 		this.setState({
 			buttonName: !this.state.buttonName
 		});
-		// compareDetails(product)
 	}
 	dataToChaild = (product) =>{
+		// push the selected value to array then setState so that the component will re-render
+		let newValue = this.state.productDetail.concat(product);
 		this.setState({
-			productDetail: product
+			productDetail: newValue
 		});
-		// let newValue = this.state.productDetail.concat(product);
-		// this.setState({
-		// 	productDetail: newValue
-		// });
 	}
 	render(){
-		const dataList = this.props.products;
-
-	let arr = [];
-	let productsItems = [];
-	// let imgPath;
-
-
-	for (let key in dataList) {
-		if (dataList.hasOwnProperty(key) && (typeof dataList[key] === "object")) {
-	  		arr.push(dataList[key]);
-	  	}else{
-	  		console.log(key + " -> " + dataList[key]);
-	  	}
-	}
-	let productLength = arr[0].products;
-	for(let prop in productLength){
-		productsItems.push(productLength[prop]);
-	}
-	// let productDetailCopy = this.state.productDetail;
+		const productsItems = this.props.products.data.products;
 	return(
 		<div>
 			{productsItems.map((product, index) =>
 			<div className="col-sm-6 col-md-3 inlineBlock" key={product.id}>
 			 <div className="product" key={product.id}>
-			 		<div className="image_overlay"> </div>
-			 		<div className="view_details" onClick={(event) =>
-			 			{this.handleClickChangeName(); this.dataToChaild(product)} }>
-			 				{ this.state.buttonName ? "Remove" : "Compare" }
-			 			</div>
-
-					<img src={product.image} title={product.name} />
+			 <div className="image_overlay"> </div>
+			 <img src={product.image} title={product.name} alt={product.name} />
+					<div className="view_details" onClick={(event) =>
+						{this.handleClickChangeName(); this.dataToChaild(product)} }>
+							{ this.state.buttonName ? "Remove" : "Compare" }
+						</div>
 					<div className="starts">
 						<div className="stats-container">
 							<span className="product_price">{product.price}</span>
@@ -78,13 +50,13 @@ class ProductsLists extends Component{
 
 			</div>
 			)}
-			{this.state.productDetail !== null &&
+			{this.state.productDetail.length >= 2 ?
 				<CompareDetails thisProduct = { this.state.productDetail } />
+				: null
 			}
 		</div>
 		)
 	}
-
 	}
 
 export default ProductsLists;
